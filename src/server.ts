@@ -11,7 +11,6 @@ import { User } from './users/user.interface';
 
 import { SuppliersService } from './suppliers/suppliers.service'
 
-const PORT: number = 4500;
 let userService: UserService;
 let supplierService: SuppliersService;
 
@@ -38,8 +37,6 @@ const postHandlerObservable = async (req: Request, res: Response, next: NextFunc
 
     await userService.createUserObservable(newUser)
 }
-
-
 
 const bootstrap = async () => {
     require('dotenv-safe').config()
@@ -76,8 +73,8 @@ const bootstrap = async () => {
         res.status(200).send('Hello server.ts !');
     })
 
-    app.listen(PORT, () => {
-        console.log(`Server listens for incoming requests at port ${PORT}`);
+    app.listen(process.env.PORT, () => {
+        console.log(`Server listens for incoming requests at port ${process.env.PORT}`);
     })
 }
 

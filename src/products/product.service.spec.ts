@@ -1,4 +1,3 @@
-import { Types } from 'mongoose'
 import { validatedEnv } from '../utils/validatedEnv'
 import { MongoDbHandler } from '../utils/MongoDbHandler'
 import { Product } from './product.interface'

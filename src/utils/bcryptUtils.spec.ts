@@ -3,7 +3,7 @@ import { hashPassword, checkPasswordMatch } from './bcryptUtils'
 
 describe('bcrypt_1 testing', () => {
     const saltRounds: number = 10;
-    const plaintextPwd: string = 'vocality';
+    const plaintextPwd: string = 'secret';
     let hash: string;
 
     test('should hash', async () => {

@@ -34,7 +34,6 @@ const UserSchema = new Schema<User, Model<User>, User>(
     */
 );
 
-//
 // virtuals
 //
 UserSchema.virtual('fullName').get(function(this: { firstName: string, lastName: string}) {

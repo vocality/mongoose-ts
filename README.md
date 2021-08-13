@@ -1,3 +1,3 @@
 ### Features
-> Relationships between collections
-> Use TypeDI Ioc container
+> - Relationships between collections
+> - Use TypeDI Ioc container

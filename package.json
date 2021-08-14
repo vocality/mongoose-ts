@@ -8,6 +8,7 @@
       "test-products-service": "jest --runInBand ./src/products/product.service.spec.ts",
       "test-suppliers-service": "jest --runInBand ./src/suppliers/suppliers.service.spec.ts",
       "test-users-service": "jest --runInBand ./src/users/users.service.spec.ts",
+      "test-server": "jest --runInBand ./src/server.spec.ts",
       "build": ".\\node_modules\\.bin\\tsc.cmd server.ts",
       "serve": "nodemon .\\src\\server.ts"
     },

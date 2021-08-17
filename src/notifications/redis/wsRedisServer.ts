@@ -1,10 +1,21 @@
 import Redis from 'ioredis'
 import { Server } from 'ws'
+import { validatedEnv } from '../../utils/validatedEnv'
+
+
+//
+// env init
+//
+require('dotenv-safe').config()
+validatedEnv()
+
+const WS_PORT = Number.parseInt(process.env.WEBSOCKET_PORT!)
+const REDIS_PORT = Number.parseInt(process.env.REDIS_PORT!)
 
 //
 // redis init
 //
-const redisClient = new Redis(6379);
+const redisClient = new Redis(REDIS_PORT);
 redisClient.subscribe('app:notifications')
 
 // 
@@ -20,7 +31,7 @@ const onMessage = (ws: any, channel: string, data: any) => {
 const onError = (err: any) => {}
 const onClose = () => {}
 
-const wss = new Server({ port: 8081 });
+const wss = new Server({ port: WS_PORT });
 wss.on('connection', ws => {
     onConnection(ws);
 
@@ -31,5 +42,5 @@ wss.on('connection', ws => {
     ws.on('close', ws => onClose())
 });
 
-console.log(`wsRedisServer started at port 8081...`)
+console.log(`[wsRedisServer.ts] WebSocketServer started at port ${WS_PORT}...`)
 

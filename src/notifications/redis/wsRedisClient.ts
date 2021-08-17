@@ -1,7 +1,4 @@
 import WebSocket from 'ws'
-import Redis from 'ioredis'
-
-//global.WebSocket = require('ws'); // <-- FIX ALL ERRORS
 
 //
 // event handlers

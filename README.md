@@ -1,6 +1,6 @@
 ## Features
 - Relationships between collections
-- Rxjs notification when a new user was created
+- Rxjs/websocket and Redis PubSub notification when a new user was created
 - IOC container (TypeDI)
 - Full typescript
 

@@ -1,8 +1,6 @@
 import Redis from 'ioredis'
 import { Server } from 'ws'
 
-//global.WebSocket = require('ws'); // <-- FIX ALL ERRORS
-
 //
 // redis init
 //

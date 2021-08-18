@@ -9,7 +9,7 @@ import { UserService } from '../users/users.service'
 @Service()
 export class SuppliersService {
     // listening for userService save event
-    onSave = () => Container.get(UserService).onSave()
+    onUserSave = () => Container.get(UserService).onSave()
 
     insertSupplier = async (supplier: Supplier | null) => {
         if (supplier === null)

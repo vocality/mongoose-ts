@@ -12,5 +12,6 @@
 
 ## Usage in development mode
 > Server without notifications: `npm run serve:dev`
+
 > Websocket/Redis server: `npm run serve-redis:dev`
 

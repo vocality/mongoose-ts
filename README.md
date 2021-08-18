@@ -8,7 +8,7 @@
 - Websocket/Redis notification (pub/sub pattern)
     - server: `src\server.redis.ts`
     - client: `public\index_redis.html`
-    - Browse `http://localhost:4500`
+    - Browse `http://localhost:4500/index_redis.html`
 
 ## Usage in development mode
 > Server without notifications: `npm run serve:dev`

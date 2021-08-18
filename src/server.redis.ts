@@ -12,7 +12,7 @@ import { MongoDbHandler } from './utils/MongoDbHandler'
 import { UserService } from './users/users.service';
 import { User } from './users/user.interface';
 
-import { WebSocketRedisService } from './notifications/redis/websocket.redis.server'
+import { WebSocketRedisServer } from './notifications/redis/websocket.redis.server'
 
 let userService: UserService;
 
@@ -49,7 +49,7 @@ const bootstrap = async () => {
     // init websocket service
     const WEBSOCKET_PORT = Number.parseInt(process.env.WEBSOCKET_PORT!)
 
-    new WebSocketRedisService(WEBSOCKET_PORT, REDIS_PORT, REDIS_CHANNEL)
+    new WebSocketRedisServer(WEBSOCKET_PORT, REDIS_PORT, REDIS_CHANNEL)
     console.log('[bootstrap] created new WebSocketRedisService...')
 
     // init services (typeDI)

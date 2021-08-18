@@ -1,12 +1,8 @@
-import 'reflect-metadata'
-import { Service } from 'typedi'
-
 import { createServer } from 'http'
 
 import Redis from 'ioredis'
 import { Server } from 'ws'
 
-@Service()
 export class WebSocketRedisService {
     private redisClient: any;
     private redisChannel: string;
@@ -49,10 +45,10 @@ export class WebSocketRedisService {
             ws.on('error', err => onError(err))
             ws.on('close', (code: number, reason: string) => {
                 onClose(code, reason);
-                /*
-                ws.terminate()
-                ws.close();
-                */
+                
+/*                 ws.terminate()
+                ws.close(); */
+                
             });
         });
 

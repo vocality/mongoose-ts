@@ -10,7 +10,8 @@
     "test-users-service": "jest --runInBand ./src/users/users.service.spec.ts",
     "test-server": "jest --runInBand ./src/server.spec.ts",
     "build": ".\\node_modules\\.bin\\tsc.cmd server.ts",
-    "serve": "nodemon .\\src\\server.ts"
+    "serve:dev": "nodemon .\\src\\server.ts",
+    "serve-redis:dev": "nodemon .\\src\\server.redis.ts"
   },
   "keywords": [],
   "author": "",

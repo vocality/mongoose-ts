@@ -49,7 +49,6 @@ const bootstrap = async () => {
     // init websocket service
     const WEBSOCKET_PORT = Number.parseInt(process.env.WEBSOCKET_PORT!)
 
-    // TODO: used TypeDI instead !!!
     new WebSocketRedisService(WEBSOCKET_PORT, REDIS_PORT, REDIS_CHANNEL)
     console.log('[bootstrap] created new WebSocketRedisService...')
 
@@ -74,7 +73,7 @@ const bootstrap = async () => {
     // launch server
     const SERVER_PORT = process.env.SERVER_PORT
     app.listen(SERVER_PORT, () => {
-        console.log(`Server listens for incoming requests at port ${SERVER_PORT}`);
+        console.log(`[bootstrap] HTTP Server listens for incoming requests at port ${SERVER_PORT}`);
     })
 }
 

@@ -74,8 +74,9 @@ const bootstrap = async () => {
     });
 
     // launch server
-    app.listen(process.env.PORT, () => {
-        console.log(`[bootstrap()] HTTP server listens for incoming requests at port ${process.env.PORT}`);
+    const SERVER_PORT = process.env.SERVER_PORT
+    app.listen(SERVER_PORT, () => {
+        console.log(`[bootstrap] HTTP Server listens for incoming requests at port ${SERVER_PORT}`);
     })
 }
 

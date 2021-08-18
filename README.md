@@ -6,7 +6,7 @@
 
 ## Notifications
 - Websocket/Redis notification (pub/sub pattern)
-    - server: `server.redis.ts`
+    - server: `src\server.redis.ts`
     - client: `public\index_redis.html`
     - Browse `http://localhost:4500`
 

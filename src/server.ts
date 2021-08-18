@@ -16,7 +16,7 @@ let supplierService: SuppliersService;
 
 let app: Application;
 
-const postHandler = async (req: Request, res: Response, next: NextFunction) => {
+const postUserHandler = async (req: Request, res: Response, next: NextFunction) => {
     const newUser: User = req.body;
 
     const { email, firstName, lastName, creditCardNumber, password, fullName } = await userService.createUser(newUser);
@@ -25,41 +25,17 @@ const postHandler = async (req: Request, res: Response, next: NextFunction) => {
     res.status(200).json(savedUser);
 }
 
-const postHandlerObservable = async (req: Request, res: Response, next: NextFunction) => {
-    const newUser: User = req.body;
-
-    userService .onSave()
-                .subscribe({
-                    next: savedUser => {
-                        res.status(201).json(savedUser)
-                    }
-                })  
-
-    await userService.createUserObservable(newUser)
-}
-
 const bootstrap = async () => {
+    // setup env
     require('dotenv-safe').config()
     validatedEnv()
 
+    // setup mongodb
     await MongoDbHandler.connectDb()
 
-    // init services and listeners
+    // init services (typeDI)
     userService = Container.get(UserService)
-    userService .onSave()
-                .subscribe({
-                    next: savedUser => {
-                        console.log(`From userService subscriber: ${savedUser}`)
-                    }
-                })  
-
     supplierService = Container.get(SuppliersService)
-    supplierService .onSave()
-                    .subscribe({
-                        next: savedUser => {
-                            console.log(`From supplierService subscriber: ${savedUser}`)
-                        }
-                    })  
 
     // init app
     app = express();
@@ -67,14 +43,15 @@ const bootstrap = async () => {
     app.use(morgan('dev'))
 
     // routes
-    app.post('/users', postHandler)
-    app.post('/users/rxjs', postHandlerObservable)
+    app.post('/users', postUserHandler)
     app.get('/', async (req: Request, res: Response) => {
         res.status(200).send('Hello server.ts !');
     })
 
-    app.listen(process.env.PORT, () => {
-        console.log(`Server listens for incoming requests at port ${process.env.PORT}`);
+    // launch server
+    const SERVER_PORT = process.env.SERVER_PORT
+    app.listen(SERVER_PORT, () => {
+        console.log(`[bootstrap] HTTP Server listens for incoming requests at port ${SERVER_PORT}`);
     })
 }
 

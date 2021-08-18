@@ -17,7 +17,7 @@ import { WebSocketRedisService } from './notifications/redis/websocket.redis.ser
 let userService: UserService;
 
 let app: Application;
-let redisClient: any;
+let redisServer: any;
 let REDIS_CHANNEL = 'app:notifications'
 
 const postHandlerRedis = async (req: Request, res: Response, next: NextFunction) => {
@@ -27,7 +27,7 @@ const postHandlerRedis = async (req: Request, res: Response, next: NextFunction)
     const savedUser = { email, firstName, lastName, creditCardNumber, fullName, password };
 
     // publish notification to redis
-    redisClient.publish(REDIS_CHANNEL, 'New user saved !')
+    redisServer.publish(REDIS_CHANNEL, 'New user saved !')
 
     // send response
     res.status(200).json(savedUser);
@@ -43,11 +43,15 @@ const bootstrap = async () => {
 
     // init redis client
     const REDIS_PORT = Number.parseInt(process.env.REDIS_PORT!)
-    redisClient = new Redis(REDIS_PORT)
+    redisServer = new Redis(REDIS_PORT)
+    console.log('[bootstrap] created new redisClient...')
 
     // init websocket service
     const WEBSOCKET_PORT = Number.parseInt(process.env.WEBSOCKET_PORT!)
+
+    // TODO: used TypeDI instead !!!
     new WebSocketRedisService(WEBSOCKET_PORT, REDIS_PORT, REDIS_CHANNEL)
+    console.log('[bootstrap] created new WebSocketRedisService...')
 
     // init services (typeDI)
     userService = Container.get(UserService)
@@ -63,6 +67,7 @@ const bootstrap = async () => {
     // serving static files
     app.use(express.static('public'))
     app.get('*', (req: Request, res: Response) => {
+        console.log(`[bootstrap] app.get()`)
         res.sendFile('index_redis.html', {root: 'public'});
     });
 

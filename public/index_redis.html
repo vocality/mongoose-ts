@@ -19,14 +19,16 @@
             try {
                 const ws = new WebSocket('ws://localhost:8081');
 
+                console.log('[index_redis.html] created new Websocket...')
+
                 // Connection opened
                 ws.addEventListener('open', function (event) {
-                    console.log('socket connected...');
+                    console.log('[index_redis.html.addEventListener().open] socket connected...');
                 });
 
                 // Listen for messages
                 ws.addEventListener('message', function (event) {
-                    console.log('Message from server ', event.data);
+                    console.log('[index_redis.html.addEventListener().message] Message from server ', event.data);
                     let alert = document.getElementById('alert');
                     alert.innerHTML = '<div class="alert alert-info alert-dismissible fade show" role="alert">' +
                                             event.data +
